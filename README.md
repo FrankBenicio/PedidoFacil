@@ -105,42 +105,19 @@ PATCH /api/pedidos/{id}/status
 
 Frontend desenvolvido em Angular + Bootstrap 5.
 
-### Tecnologias do frontend
+## Tecnologias frontend
 
 - Angular
 - TypeScript
 - Bootstrap 5
-- HTML
-- CSS
-- Consumo de API REST
 
-### Funcionalidades do frontend
+## Funcionalidades frontend
 
 - Listagem de produtos
 - Cadastro de produtos
-- Edição de produtos
-- Remoção de produtos
 - Listagem de pedidos
-- Filtro de pedidos por status
-- Visualização dos detalhes do pedido
-- Criação de pedido com múltiplos produtos
-- Atualização do status do pedido
-
-### Estrutura do frontend
-
-```txt
-pedido-facil-angular
-├── src
-│   ├── app
-│   │   ├── core
-│   │   │   └── services
-│   │   ├── features
-│   │   │   ├── produtos
-│   │   │   └── pedidos
-│   │   └── shared
-│   └── styles.css
-```
-
+- Filtro por status
+- Detalhe do pedido
 
 ## Configurar API
 
