@@ -1,6 +1,6 @@
 # Pedido Fácil API
 
-API REST para cadastro e acompanhamento de pedidos, desenvolvida em .NET Framework 4.8 com Web API 2, Entity Framework 6 e SQL Server.
+API REST para cadastro e acompanhamento de pedidos, desenvolvida em .NET Framework 4.7.2 com Web API 2, Entity Framework 6 e SQL Server.
 
 ## Tecnologias
 
@@ -39,8 +39,8 @@ src
 ### Pré-requisitos
 
 - Visual Studio 2022
-- .NET Framework 4.8
-- SQL Server ou LocalDB
+- .NET Framework 4.7.2
+- SQL Server
 
 ### Configurar banco
 
