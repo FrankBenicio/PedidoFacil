@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="PedidoFacil.Application/PedidoFacil.Application.csproj" Id="020583e4-75bf-4054-ae96-7c89c491a551" />
+  <Project Path="src/PedidoFacil.API/PedidoFacil.API.csproj" Id="9f5d5f6a-cbea-4814-9508-1c1a722fe551" />
+  <Project Path="src/PedidoFacil.Domain/PedidoFacil.Domain.csproj" Id="a76f149e-1ae4-45f1-891b-a6fad1009393" />
+  <Project Path="src/PedidoFacil.Infra/PedidoFacil.Infra.csproj" Id="412ab12d-11e7-491b-b8f5-442743e499ed" />
+</Solution>
