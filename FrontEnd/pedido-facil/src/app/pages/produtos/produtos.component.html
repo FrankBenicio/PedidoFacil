@@ -1,0 +1,79 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h1 class="page-title h3 mb-1">Produtos</h1>
+    <p class="text-muted mb-0">Cadastro e manutenção de produtos.</p>
+  </div>
+</div>
+
+<div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+<div *ngIf="success" class="alert alert-success">{{ success }}</div>
+
+<div class="row g-4">
+  <div class="col-lg-4">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title mb-3">{{ form.Id ? 'Editar produto' : 'Novo produto' }}</h5>
+        <form (ngSubmit)="salvar()">
+          <div class="mb-3">
+            <label class="form-label">Nome</label>
+            <input class="form-control" [(ngModel)]="form.Nome" name="nome" required />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Preço</label>
+            <input type="number" class="form-control" [(ngModel)]="form.Preco" name="preco" required />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Estoque</label>
+            <input type="number" class="form-control" [(ngModel)]="form.Estoque" name="estoque" required />
+          </div>
+          <div class="d-grid gap-2">
+            <button class="btn btn-primary" type="submit">
+              <i class="bi bi-save me-1"></i>Salvar
+            </button>
+            <button class="btn btn-outline-secondary" type="button" (click)="limpar()">Limpar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-8">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h5 class="card-title mb-0">Lista de produtos</h5>
+          <button class="btn btn-sm btn-outline-primary" (click)="carregar()">Atualizar</button>
+        </div>
+
+        <div *ngIf="loading" class="text-muted">Carregando...</div>
+
+        <div class="table-responsive" *ngIf="!loading">
+          <table class="table table-hover align-middle">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Preço</th>
+                <th>Estoque</th>
+                <th class="text-end">Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let produto of produtos">
+                <td>{{ produto.Nome }}</td>
+                <td>{{ produto.Preco | currency:'BRL' }}</td>
+                <td>{{ produto.Estoque }}</td>
+                <td class="text-end">
+                  <button class="btn btn-sm btn-outline-secondary me-2" (click)="editar(produto)">Editar</button>
+                  <button class="btn btn-sm btn-outline-danger" (click)="remover(produto.Id)">Remover</button>
+                </td>
+              </tr>
+              <tr *ngIf="produtos.length === 0">
+                <td colspan="4" class="text-center text-muted py-4">Nenhum produto encontrado.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

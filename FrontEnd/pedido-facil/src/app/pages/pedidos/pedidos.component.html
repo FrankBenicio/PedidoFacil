@@ -1,0 +1,94 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h1 class="page-title h3 mb-1">Pedidos</h1>
+    <p class="text-muted mb-0">Consulta de pedidos com filtro por status.</p>
+  </div>
+</div>
+
+<div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+<div *ngIf="success" class="alert alert-success">{{ success }}</div>
+
+<div class="row g-4">
+  <div class="col-lg-4">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title mb-3">Novo pedido</h5>
+        <form (ngSubmit)="criarPedido()">
+          <div class="mb-3">
+            <label class="form-label">Produto</label>
+            <select class="form-select" [(ngModel)]="novoPedido.ProdutoId" name="produtoId" required>
+              <option value="">Selecione</option>
+              <option *ngFor="let produto of produtos" [value]="produto.Id">
+                {{ produto.Nome }} — Estoque: {{ produto.Estoque }}
+              </option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Quantidade</label>
+            <input type="number" min="1" class="form-control" [(ngModel)]="novoPedido.Quantidade" name="quantidade" required />
+          </div>
+          <button class="btn btn-primary w-100" type="submit">
+            <i class="bi bi-plus-circle me-1"></i>Criar pedido
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-8">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <div class="row g-2 align-items-end mb-3">
+          <div class="col-md-6">
+            <label class="form-label">Filtrar por status</label>
+            <select class="form-select" [(ngModel)]="statusFiltro" name="statusFiltro" (change)="carregarPedidos()">
+              <option [ngValue]="null">Todos</option>
+              <option [ngValue]="pedidoStatus.Pendente">Pendente</option>
+              <option [ngValue]="pedidoStatus.Pago">Pago</option>
+              <option [ngValue]="pedidoStatus.Cancelado">Cancelado</option>
+            </select>
+          </div>
+          <div class="col-md-6 text-md-end">
+            <button class="btn btn-outline-primary" (click)="carregarPedidos()">Atualizar</button>
+          </div>
+        </div>
+
+        <div *ngIf="loading" class="text-muted">Carregando...</div>
+
+        <div class="table-responsive" *ngIf="!loading">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Código</th>
+                <th>Status</th>
+                <th>Total</th>
+                <th>Criado em</th>
+                <th class="text-end">Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let pedido of pedidos">
+                <td><code>{{ pedido.Id.substring(0, 8) }}</code></td>
+                <td>
+                  <span class="badge badge-status" [ngClass]="statusClasse(pedido.Status)">
+                    {{ statusTexto(pedido.Status) }}
+                  </span>
+                </td>
+                <td>{{ pedido.ValorTotal | currency:'BRL' }}</td>
+                <td>{{ pedido.CreatedAt | date:'dd/MM/yyyy HH:mm' }}</td>
+                <td class="text-end">
+                  <a class="btn btn-sm btn-outline-primary me-2" [routerLink]="['/pedidos', pedido.Id]">Detalhes</a>
+                  <button class="btn btn-sm btn-outline-success me-2" *ngIf="pedido.Status === pedidoStatus.Pendente" (click)="alterarStatus(pedido.Id, pedidoStatus.Pago)">Pagar</button>
+                  <button class="btn btn-sm btn-outline-danger" *ngIf="pedido.Status !== pedidoStatus.Cancelado" (click)="alterarStatus(pedido.Id, pedidoStatus.Cancelado)">Cancelar</button>
+                </td>
+              </tr>
+              <tr *ngIf="pedidos.length === 0">
+                <td colspan="5" class="text-center text-muted py-4">Nenhum pedido encontrado.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

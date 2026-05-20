@@ -98,3 +98,63 @@ PATCH /api/pedidos/{id}/status
 - Factory Method
 - Rich Domain Model
 - FluentValidation
+
+
+
+# Frontend
+
+Frontend desenvolvido em Angular + Bootstrap 5.
+
+## Tecnologias frontend
+
+- Angular
+- TypeScript
+- Bootstrap 5
+
+## Funcionalidades frontend
+
+- Listagem de produtos
+- Cadastro de produtos
+- Listagem de pedidos
+- Filtro por status
+- Detalhe do pedido
+
+## Configurar API
+
+Arquivo:
+
+```txt
+src/app/core/services/environment.ts
+```
+
+```ts
+export const environment = {
+  apiUrl: 'https://localhost:44338/api'
+};
+```
+
+## Como executar frontend
+
+### Instalar dependências
+
+```bash
+npm install
+```
+
+### Rodar aplicação
+
+```bash
+npm start
+```
+
+ou:
+
+```bash
+ng serve --port 4200
+```
+
+Frontend:
+
+```txt
+http://localhost:4200
+```

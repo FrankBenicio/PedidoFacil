@@ -1,5 +1,6 @@
 ﻿using PedidosApi.Api.Middlewares;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace PedidoFacil.API
 {
@@ -7,9 +8,13 @@ namespace PedidoFacil.API
     {
         public static void Register(HttpConfiguration config)
         {
-            // Web API configuration and services
+            var cors = new EnableCorsAttribute(
+                       "http://localhost:4200",
+                       "*",
+                       "*");
 
-            // Web API routes
+            config.EnableCors(cors);
+
             config.MapHttpAttributeRoutes();
 
             config.Filters.Add(new ApiExceptionFilterAttribute());

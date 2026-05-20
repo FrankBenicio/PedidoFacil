@@ -1,0 +1,55 @@
+<a routerLink="/pedidos" class="btn btn-outline-secondary mb-3">
+  <i class="bi bi-arrow-left me-1"></i>Voltar
+</a>
+
+<div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+<div *ngIf="loading" class="text-muted">Carregando...</div>
+
+<div class="card shadow-sm" *ngIf="pedido">
+  <div class="card-body">
+    <div class="d-flex justify-content-between align-items-start mb-4">
+      <div>
+        <h1 class="h4 page-title mb-1">Detalhe do pedido</h1>
+        <p class="text-muted mb-0"><code>{{ pedido.Id }}</code></p>
+      </div>
+      <span class="badge bg-secondary">{{ statusTexto(pedido.Status) }}</span>
+    </div>
+
+    <div class="row mb-4">
+      <div class="col-md-4">
+        <div class="border rounded-3 p-3 bg-light">
+          <div class="text-muted small">Valor total</div>
+          <div class="fs-5 fw-bold">{{ pedido.ValorTotal | currency:'BRL' }}</div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="border rounded-3 p-3 bg-light">
+          <div class="text-muted small">Criado em</div>
+          <div class="fs-6 fw-bold">{{ pedido.CreatedAt | date:'dd/MM/yyyy HH:mm' }}</div>
+        </div>
+      </div>
+    </div>
+
+    <h5 class="mb-3">Itens</h5>
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Produto</th>
+            <th>Quantidade</th>
+            <th>Valor unitário</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of pedido.Itens">
+            <td>{{ item.ProdutoNome }}</td>
+            <td>{{ item.Quantidade }}</td>
+            <td>{{ item.ValorUnitario | currency:'BRL' }}</td>
+            <td>{{ item.ValorTotal | currency:'BRL' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
